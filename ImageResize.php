@@ -45,7 +45,6 @@ class ImageResize extends Component
     public function init()
     {
         FileHelper::createDirectory(Yii::getAlias($this->cachePath));
-        FileHelper::createDirectory(Yii::getAlias($this->cacheFolder));
         parent::init();
     }
 
