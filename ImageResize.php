@@ -44,8 +44,8 @@ class ImageResize extends Component
      */
     public function init()
     {
-        FileHelper::createDirectory($this->cachePath);
-        FileHelper::createDirectory($this->cacheFolder);
+        FileHelper::createDirectory(Yii::getAlias($this->cachePath));
+        FileHelper::createDirectory(Yii::getAlias($this->cacheFolder));
         parent::init();
     }
 
@@ -74,9 +74,8 @@ class ImageResize extends Component
         $normalizeResizedFilePath = FileHelper::normalizePath($resizedFilePath);
         $resizedFileName = pathinfo($normalizeResizedFilePath, PATHINFO_BASENAME);
         //get url
-        $sFileUrl = $this->cacheFolder . '/' . substr($resizedFileName, 0, 2) . '/' . $resizedFileName;
+        $sFileUrl = $this->cacheFolder . DIRECTORY_SEPARATOR . substr($resizedFileName, 0, 2) . DIRECTORY_SEPARATOR . $resizedFileName;
         //return path
-
         return $sFileUrl;
     }
 
