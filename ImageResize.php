@@ -7,13 +7,14 @@ use Imagine\Exception\RuntimeException;
 use Imagine\Image\Box;
 use Imagine\Image\ManipulatorInterface;
 use Yii;
+use yii\base\Component;
 use yii\base\ErrorException;
 use yii\base\Exception;
 use yii\base\InvalidParamException;
 use yii\helpers\FileHelper;
 use yii\imagine\Image;
 
-class ImageResize
+class ImageResize extends Component
 {
 
     const IMAGE_OUTBOUND = ManipulatorInterface::THUMBNAIL_OUTBOUND;
@@ -36,6 +37,17 @@ class ImageResize
 
     /** @var  string $cacheFolder folder to store thumb */
     public $cacheFolder = 'upload/thumb';
+
+
+    /**
+     * @throws Exception
+     */
+    public function init()
+    {
+        FileHelper::createDirectory($this->cachePath);
+        FileHelper::createDirectory($this->cacheFolder);
+        parent::init();
+    }
 
     /**
      * Creates and caches the image and returns URL from resized file.
